@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input id="photo" type="file">
+        <div id="results"></div>
+        <script type="module">
+            import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
+            async function loaded(reader) {
+			try {			
+                const client = await Client.connect("Cleii/minimal");
+                const result = await client.predict("/predict", { 
+				    img: photo.files[0], 
+                });
+                const data = result.data[0]
+                const label = data.label;
+                const confN = data.confidences[0]
+                const confY = data.confidences[1]
+
+                results.innerHTML = `<br/>
+                <img src="${reader.result}" width="300"> 
+                <p>${label}</p>
+                <p>${confN.label}: ${confN.confidence}</p>
+                <p>${confY.label}: ${confY.confidence}</p>`
+                console.log(result.data);
+            } catch(e) {
+                console.log(e);
+                }      
+            }
+
+            function read() {
+                const reader = new FileReader()
+                reader.addEventListener('load', () => loaded(reader));
+                reader.readAsDataURL(photo.files[0]);
+            }
+            photo.addEventListener('input', read);
+        </script>
+    </body>
+</html>
