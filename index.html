@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html>
+    <head>
+  <meta charset="UTF-8" />
+  <title>SmartMRI</title>
+  <link rel="stylesheet" href="styles.css" />
+    </head>
     <body>
-        <input id="photo" type="file">
-        <div id="results"></div>
+        <div id="upload-container">
+        <div id="photo-container">
+            <img src="images/icons8-upload-96.png"></img>
+        </div> 
+        <div id="buttons-container">
+        <input id="photo" type="file" style="display: none;">
+        <button id="upload-button">Upload a Photo</button>
+        <button id="submit-button">Submit</button>
+        </div>
+        </div>
+        <div id="results-and-examples-container">
+        <div id="results-container">
+        <div id="results">
+            <br/>
+                <h3>Prediction: Tumor</h3>
+                <h4>Probabilities:</h4>
+                <p>Tumor: 0.9931105375289917</p>
+                <p>No Tumor: 0.006889517419040203</p>`
+        </div>
+        </div>
+        <div id="examples-container">
+            <img src="images/tumor1.jpg" class="ex"></img>
+            <img src="images/normal1.jpg" class="ex"></img>
+            <img src="images/tumor2.jpg" class="ex"></img>
+        </div>
+        </div>
+        </div>
         <script type="module">
             import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
-            async function loaded(reader) {
+
+            async function loaded() {
 			try {			
                 const client = await Client.connect("Cleii/minimal");
                 const result = await client.predict("/predict", { 
@@ -15,10 +46,9 @@
                 const label = data.label;
                 const confN = data.confidences[0]
                 const confY = data.confidences[1]
-
                 results.innerHTML = `<br/>
-                <img src="${reader.result}" width="300"> 
-                <p>${label}</p>
+                <h3>Prediction: ${label}</h3>
+                <h4>Probabilities:</h4>
                 <p>${confN.label}: ${confN.confidence}</p>
                 <p>${confY.label}: ${confY.confidence}</p>`
                 console.log(result.data);
@@ -27,11 +57,20 @@
                 }      
             }
 
+            function displayImg(reader) {
+                document.getElementById("photo-container").innerHTML = `<img id="photo-display" src=${reader.result}></img>`
+            }
+
             function read() {
                 const reader = new FileReader()
-                reader.addEventListener('load', () => loaded(reader));
+                reader.addEventListener('load', () => {
+                    displayImg(reader);
+                });
                 reader.readAsDataURL(photo.files[0]);
             }
+
+            document.getElementById("upload-button").addEventListener('click', () => {photo.click();})
+            document.getElementById("submit-button").addEventListener('click', loaded);
             photo.addEventListener('input', read);
         </script>
     </body>
