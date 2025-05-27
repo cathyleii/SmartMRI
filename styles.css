@@ -4,16 +4,22 @@
 }
 
 #photo-container{
-    background-color: rgba(55, 182, 255, 0.602);
+    background-color: rgba(37, 179, 255, 0.602);
     width: 350px;
     height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+#results{
+    color: white;
 }
 
 #results-container{
-    background-color: grey;
+    background-color: rgba(27, 23, 23, 0.673);
     width: 400px;
     height: 200px;
     padding-left: 30px;
@@ -44,13 +50,14 @@ body{
 .ex{
     width: 100px;
     height: 100px;
+    background-size: cover;
 }
 
 #examples-container{
     display: flex;
     justify-content: space-evenly;
     margin-top: 15px;
-    background-color: rgb(150, 133, 133);
+    background-color: rgb(56, 185, 255);
     height: 140px;
     align-items: center;
 }
@@ -73,23 +80,22 @@ body{
 
 button{
     background-color: initial;
-    background-image: linear-gradient(#464d55, #25292e);
+    background-image: linear-gradient(#292c30, #25292e);
     border-radius: 8px;
     border-width: 0;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .2),0 3px 6px rgba(0, 0, 0, .1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .8),0 3px 6px rgba(0, 0, 0, .5);
     color: #fff;
     cursor: pointer;
     height: 52px;
 }
 
 input::file-selector-button:active, button:active{
-    outline: 0;
-    background-image: linear-gradient(#32a6ff, #288edc);
+    background-image: linear-gradient(rgb(12, 40, 63), rgb(9, 28, 60));
 }
 
 
 input::file-selector-button:hover, button:hover{
-  box-shadow: rgba(0, 1, 0, .2) 0 5px 8px;
-  opacity: .85;
+    box-shadow: rgba(0, 1, 0, .2) 0 5px 8px;
+    background-image: linear-gradient(#32a6ff, #288edc);
 }
 
