@@ -1,80 +1,125 @@
 <!DOCTYPE html>
 <html>
-    <head>
-  <meta charset="UTF-8" />
-  <title>SmartMRI</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
-    </head>
-    <body>
-        <div id="upload-container">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SmartMRI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+</head>
+
+<body>
+    <div id="upload-container">
         <div id="photo-container">
-            <img src="images/icons8-upload-96.png"></img>
-        </div> 
+            <img src="images/icons8-upload-96.png" />
+        </div>
         <div id="buttons-container">
-        <input id="photo" type="file" style="display: none;">
-        <button id="upload-button">Upload a Photo</button>
-        <button id="submit-button">Submit</button>
+            <input id="photo" type="file" style="display: none;">
+            <button id="upload-button">Upload a Photo</button>
+            <button id="submit-button">Submit</button>
         </div>
-        </div>
-        <div id="results-and-examples-container">
+    </div>
+    <div id="results-and-examples-container">
         <div id="results-container">
-        <div id="results">
-            <br/>
-                <h3>Prediction: Tumor</h3>
-                <h4>Probabilities:</h4>
-                <p>Tumor: 0.9931105375289917</p>
-                <p>No Tumor: 0.006889517419040203</p>`
-        </div>
+            <div id="results">
+            </div>
         </div>
         <div id="examples-container">
-            <button class="ex" 
-                style="background-image: url(images/tumor1.jpg);">
-            </button>
-            <img src="images/normal1.jpg" class="ex"></img>
-            <img src="images/tumor2.jpg" class="ex"></img>
+            <h4>Examples:</h4>
+            <div id="ex-buttons-container">
+                <button class="ex-button" style="background-image: url(images/tumor1.jpg);"
+                    data-img="images/tumor1.jpg">
+                </button>
+                <button class="ex-button" style="background-image: url(images/normal1.jpg);"
+                    data-img="images/normal1.jpg">
+                </button>
+                <button class="ex-button" style="background-image: url(images/normal2.jpeg);"
+                    data-img="images/normal2.jpeg">
+                </button>
+                <button class="ex-button" style="background-image: url(images/tumor2.jpg);"
+                    data-img="images/tumor2.jpg">
+                </button>
+                <button class="ex-button" style="background-image: url(images/tumor3.jpg);"
+                    data-img="images/tumor3.jpg">
+                </button>
+            </div>
         </div>
-        </div>
-        </div>
-        <script type="module">
-            import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
+    </div>
+    </div>
+    <script type="module">
+        import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
 
-            async function loaded() {
-			try {			
+        async function loaded() {
+            try {
+                results.innerHTML = `
+                <img src="images/Rolling@1x-1.0s-200px-200px.svg" style="height: 100px; position: absolute; left: 50%; transform: translate(-50%, -50%); top: 50%;"/>`
+                let image = "";
+                if (photo.files[0]) {
+                    image = photo.files[0];
+                } else {
+                    const exampleImg = document.getElementById("photo-display").getAttribute("src");
+                    console.log(exampleImg);
+                    const response = await fetch(exampleImg);
+                    image = await response.blob();
+                }
+                console.log(image);
                 const client = await Client.connect("Cleii/minimal");
-                const result = await client.predict("/predict", { 
-				    img: photo.files[0], 
+                const result = await client.predict("/predict", {
+                    img: image,
                 });
                 const data = result.data[0]
                 const label = data.label;
                 const confN = data.confidences[0]
                 const confY = data.confidences[1]
+
+                const confNPct = (confN.confidence * 100).toFixed(2) + "%";
+                const confYPct = (confY.confidence * 100).toFixed(2) + "%";
+
                 results.innerHTML = `<br/>
-                <h3>Prediction: ${label}</h3>
-                <h4>Probabilities:</h4>
-                <p>${confN.label}: ${confN.confidence}</p>
-                <p>${confY.label}: ${confY.confidence}</p>`
-                console.log(result.data);
-            } catch(e) {
-                console.log(e);
-                }      
+                <h2>Prediction: ${label}</h2>
+                <h3>Probabilities:</h3>
+                <div id='confBarY' class='confBar'></div>
+                <p>${confN.label}: ${confNPct}</p>
+                <div id='confBarN'class='confBar'></div>
+                <p>${confY.label}: ${confYPct}</p>`
+            } catch (e) {
+                results.innerHTML = `<br/>
+                <h2>Error:</h2>
+                <p>${console.log(e)}</p>`;
             }
+        }
 
-            function displayImg(reader) {
-                document.getElementById("photo-container").innerHTML = `<img id="photo-display" src=${reader.result}></img>`
-            }
+        function displayImg(img) {
+            document.getElementById("photo-container").innerHTML = `<img id="photo-display" src="${img}"/>`
+        }
 
-            function read() {
-                const reader = new FileReader()
-                reader.addEventListener('load', () => {
-                    displayImg(reader);
-                });
-                reader.readAsDataURL(photo.files[0]);
-            }
+        function read() {
+            const reader = new FileReader()
+            reader.addEventListener('load', () => {
+                displayImg(reader.result);
+            });
+            reader.readAsDataURL(photo.files[0]);
+        }
 
-            document.getElementById("upload-button").addEventListener('click', () => {photo.click();})
-            document.getElementById("submit-button").addEventListener('click', loaded);
-            photo.addEventListener('input', read);
-        </script>
-    </body>
+        document.getElementById("upload-button").addEventListener('click', () => { photo.click(); })
+        document.getElementById("submit-button").addEventListener('click', loaded);
+
+        const exBtns = document.getElementsByClassName("ex-button");
+
+        for (const btn of exBtns) {
+            btn.addEventListener('click', () => { displayImg(btn.getAttribute("data-img")) })
+        }
+        photo.addEventListener('input', read);
+
+        //         results.innerHTML = `<br/>
+        // <h2>Prediction: Tumor</h2>
+        // <h3>Probabilities:</h3>
+        // <div id='confBarY' class='confBar'></div>
+        // <p>Tumor: 88%</p>
+        // <div id='confBarN' class='confBar'></div>
+        // <p>No Tumor: 12%</p>`
+        // console.log(results.innerHTML);
+    </script>
+</body>
+
 </html>

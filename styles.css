@@ -1,101 +1,144 @@
-#photo-display{
-    width: 90%;
-    height: 90%;
+#photo-display {
+	width: 90%;
+	height: 90%;
 }
 
-#photo-container{
-    background-color: rgba(37, 179, 255, 0.602);
-    width: 350px;
-    height: 350px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid rgb(255, 255, 255);
-    border-radius: 10px;
+#photo-container {
+	background-color: rgba(61, 203, 255, 0.251);
+	width: 350px;
+	height: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid rgb(255, 255, 255);
+	border-radius: 10px;
 }
 
-#results{
-    color: white;
+.confBar {
+	height: 10px;
+	width: 100%;
 }
 
-#results-container{
-    background-color: rgba(27, 23, 23, 0.673);
-    width: 400px;
-    height: 200px;
-    padding-left: 30px;
+#confBarY {
+	background-image: linear-gradient(0.25turn, #2d1fb3, rgb(61, 255, 229) 70%);
 }
 
-body{
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background-image: url("images/medical-bg.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow-x: auto;
-    background-position: center;
-    background-size: cover;
+#confBarN {
+	background-image: linear-gradient(0.25turn, #2d1fb3, rgb(62, 207, 255) 70%);
 }
 
-
-
-#upload-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 60px;
+#results {
+	color: white;
 }
 
-.ex{
-    width: 100px;
-    height: 100px;
-    background-size: cover;
+#results-container {
+	background-color: rgba(27, 23, 23, 0.673);
+	width: 500px;
+	height: 250px;
+	padding-left: 30px;
+	padding-right: 30px;
+	position: relative;
 }
 
-#examples-container{
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 15px;
-    background-color: rgb(56, 185, 255);
-    height: 140px;
-    align-items: center;
+#results-and-examples-container {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
 }
 
-
-#buttons-container{
-    display:flex;
-    margin-top: 30px;
-    column-gap: 50px;
+body {
+	display: flex;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-image: url("images/medical-bg.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	overflow-x: auto;
+	background-position: center;
+	background-size: cover;
 }
 
-#upload-button{
-    margin-bottom: 7px;
-    width: 150px;
+#upload-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 60px;
+}
+
+.ex-button {
+	width: 100px;
+	height: 100px;
+	background-size: cover;
+	box-shadow: none;
+	border: thin, solid, white;
+}
+
+.ex-button:hover {
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8), 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+#examples-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 200px;
+	align-items: center;
+}
+
+h4 {
+	align-self: start;
+	padding-left: 20px;
+	position: relative;
+	bottom: 20px;
+	background-color: #292c309c;
+	color: white;
+	height: 30px;
+	width: 100px;
+	line-height: 30px;
+	border-radius: 1px;
+}
+
+#ex-buttons-container {
+	display: flex;
+	column-gap: 25px;
+	position: relative;
+	bottom: 20px;
+}
+
+#buttons-container {
+	display: flex;
+	margin-top: 30px;
+	column-gap: 50px;
+}
+
+#upload-button {
+	margin-bottom: 7px;
+	width: 150px;
 }
 
 #submit-button {
-    width: 100px;
+	width: 100px;
 }
 
-button{
-    background-color: initial;
-    background-image: linear-gradient(#292c30, #25292e);
-    border-radius: 8px;
-    border-width: 0;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .8),0 3px 6px rgba(0, 0, 0, .5);
-    color: #fff;
-    cursor: pointer;
-    height: 52px;
+button {
+	background-color: initial;
+	background-image: linear-gradient(#292c30, #25292e);
+	border-radius: 8px;
+	border-width: 0;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8), 0 3px 6px rgba(0, 0, 0, 0.5);
+	color: #fff;
+	cursor: pointer;
+	height: 52px;
 }
 
-input::file-selector-button:active, button:active{
-    background-image: linear-gradient(rgb(12, 40, 63), rgb(9, 28, 60));
+input::file-selector-button:active,
+button:active {
+	background-image: linear-gradient(rgb(12, 40, 63), rgb(9, 28, 60));
 }
 
-
-input::file-selector-button:hover, button:hover{
-    box-shadow: rgba(0, 1, 0, .2) 0 5px 8px;
-    background-image: linear-gradient(#32a6ff, #288edc);
+input::file-selector-button:hover,
+button:hover {
+	box-shadow: rgba(0, 1, 0, 0.2) 0 5px 8px;
+	background-image: linear-gradient(#32a6ff, #288edc);
 }
-
