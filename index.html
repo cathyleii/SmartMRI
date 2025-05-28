@@ -78,9 +78,9 @@
                 results.innerHTML = `<br/>
                 <h2>Prediction: ${label}</h2>
                 <h3>Probabilities:</h3>
-                <div id='confBarY' class='confBar'></div>
+                <div id='confBarY' class='confBar' style='width: ${confNPct};'></div>
                 <p>${confN.label}: ${confNPct}</p>
-                <div id='confBarN'class='confBar'></div>
+                <div id='confBarN'class='confBar' style='width: ${confYPct}'></div>
                 <p>${confY.label}: ${confYPct}</p>`
             } catch (e) {
                 results.innerHTML = `<br/>

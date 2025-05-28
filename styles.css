@@ -4,19 +4,18 @@
 }
 
 #photo-container {
-	background-color: rgba(61, 203, 255, 0.251);
+	background-color: rgba(10, 149, 255, 0.2);
 	width: 350px;
 	height: 350px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 3px solid rgb(255, 255, 255);
+	border: 1px solid rgba(255, 255, 255, 0.8);
 	border-radius: 10px;
 }
 
 .confBar {
 	height: 10px;
-	width: 100%;
 }
 
 #confBarY {
@@ -140,5 +139,5 @@ button:active {
 input::file-selector-button:hover,
 button:hover {
 	box-shadow: rgba(0, 1, 0, 0.2) 0 5px 8px;
-	background-image: linear-gradient(#32a6ff, #288edc);
+	background-image: linear-gradient(#5be6ff, #20b6e0);
 }
