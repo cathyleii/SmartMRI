@@ -85,6 +85,10 @@ body {
 	align-items: center;
 }
 
+p {
+	font-family: TW-regular;
+}
+
 h4 {
 	align-self: start;
 	padding-left: 20px;
@@ -93,9 +97,22 @@ h4 {
 	background-color: #292c309c;
 	color: white;
 	height: 30px;
-	width: 100px;
+	width: 600px;
 	line-height: 30px;
 	border-radius: 1px;
+	font-family: TW-semi-bold;
+	font-size: 21px;
+}
+
+h3 {
+	font-family: TW-semi-bold;
+	margin-top: -10px;
+}
+
+h2 {
+	font-family: TW-bold;
+	font-size: 30px;
+	margin-top: -5px;
 }
 
 #ex-buttons-container {
@@ -129,6 +146,8 @@ button {
 	color: #fff;
 	cursor: pointer;
 	height: 52px;
+	font-family: TW-regular;
+	font-size: 15px;
 }
 
 input::file-selector-button:active,
@@ -140,4 +159,19 @@ input::file-selector-button:hover,
 button:hover {
 	box-shadow: rgba(0, 1, 0, 0.2) 0 5px 8px;
 	background-image: linear-gradient(#5be6ff, #20b6e0);
+}
+
+@font-face {
+	font-family: TW-bold;
+	src: url("Titillium_Web/TitilliumWeb-Bold.ttf");
+}
+
+@font-face {
+	font-family: TW-regular;
+	src: url("Titillium_Web/TitilliumWeb-Regular.ttf");
+}
+
+@font-face {
+	font-family: TW-semi-bold;
+	src: url("Titillium_Web/TitilliumWeb-SemiBold.ttf");
 }
