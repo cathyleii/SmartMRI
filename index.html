@@ -9,43 +9,46 @@
 </head>
 
 <body>
-    <div id="upload-container">
-        <div id="photo-container">
-            <img src="images/icons8-upload-96.png" />
-        </div>
-        <div id="buttons-container">
-            <input id="photo" type="file" style="display: none;">
-            <button id="upload-button">Upload a Photo</button>
-            <button id="submit-button">Submit</button>
-        </div>
-    </div>
-    <div id="results-and-examples-container">
-        <div id="results-container">
-            <div id="results">
-                <h3 style="position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%; font-size: 30px;">Submit an Image</h3>
+    <h1>SmartMRI</h1>
+    <div id="main-container">
+        <div id="upload-container">
+            <div id="photo-container">
+                <img src="images/icons8-upload-96.png" />
+            </div>
+            <div id="buttons-container">
+                <input id="photo" type="file" style="display: none;">
+                <button id="upload-button">Upload a Photo</button>
+                <button id="submit-button">Submit</button>
             </div>
         </div>
-        <div id="examples-container">
-            <h4>Examples:</h4>
-            <div id="ex-buttons-container">
-                <button class="ex-button" style="background-image: url(images/tumor1.jpg);"
-                    data-img="images/tumor1.jpg">
-                </button>
-                <button class="ex-button" style="background-image: url(images/normal1.jpg);"
-                    data-img="images/normal1.jpg">
-                </button>
-                <button class="ex-button" style="background-image: url(images/normal2.jpeg);"
-                    data-img="images/normal2.jpeg">
-                </button>
-                <button class="ex-button" style="background-image: url(images/tumor2.jpg);"
-                    data-img="images/tumor2.jpg">
-                </button>
-                <button class="ex-button" style="background-image: url(images/tumor3.jpg);"
-                    data-img="images/tumor3.jpg">
-                </button>
+        <div id="results-and-examples-container">
+            <div id="results-container">
+                <div id="results">
+                    <h3 style="position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%; font-size: 30px;">Submit an Image</h3>
+                </div>
+            </div>
+            <div id="examples-container">
+                <h4>Examples:</h4>
+                <div id="ex-buttons-container">
+                    <button class="ex-button" style="background-image: url(images/tumor1.jpg);"
+                        data-img="images/tumor1.jpg">
+                    </button>
+                    <button class="ex-button" style="background-image: url(images/normal1.jpg);"
+                        data-img="images/normal1.jpg">
+                    </button>
+                    <button class="ex-button" style="background-image: url(images/normal2.jpeg);"
+                        data-img="images/normal2.jpeg">
+                    </button>
+                    <button class="ex-button" style="background-image: url(images/tumor2.jpg);"
+                        data-img="images/tumor2.jpg">
+                    </button>
+                    <button class="ex-button" style="background-image: url(images/tumor3.jpg);"
+                        data-img="images/tumor3.jpg">
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
     </div>
     <script type="module">
         import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
@@ -111,15 +114,6 @@
             btn.addEventListener('click', () => { displayImg(btn.getAttribute("data-img")) })
         }
         photo.addEventListener('input', read);
-
-        //         results.innerHTML = `<br/>
-        // <h2>Prediction: Tumor</h2>
-        // <h3>Probabilities:</h3>
-        // <div id='confBarY' class='confBar'></div>
-        // <p>Tumor: 88%</p>
-        // <div id='confBarN' class='confBar'></div>
-        // <p>No Tumor: 12%</p>`
-        // console.log(results.innerHTML);
     </script>
 </body>
 
